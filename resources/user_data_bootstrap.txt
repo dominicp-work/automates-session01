@@ -1,0 +1,4 @@
+<powershell>
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+Add-Content -Value "<html><head><title>Hello World!</title></head><body><h1>Hello World!</h1><p>I have deployed a web server with terraform.</body></html>" -Path C:\inetpub\wwwroot\index.html
+</powershell>
