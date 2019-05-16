@@ -2,8 +2,8 @@
 # Enter users name below to populate within this file.
 variable "friendlyName" { default = "YOUR_NAME_HERE" }
 
-variable "aws_access_key" {default = "XXXXXXXXXXXXXXXXXXXXXXXXXX"}
-variable "aws_secret_key" {default = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+variable "aws_access_key" {default = "AKIA5QCGOZP4LIYZ5EFN"}
+variable "aws_secret_key" {default = "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"}
 
 variable "myWorkloadTag" { default = "Session01-HelloWorld" }
 variable "aws_region" {default = "ap-southeast-2"}
