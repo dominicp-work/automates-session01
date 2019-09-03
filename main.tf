@@ -2,15 +2,13 @@
 # Enter users name below to populate within this file.
 variable "friendlyName" { default = "YOUR_NAME_HERE" }
 
-variable "aws_access_key" {default = "xx"}
-variable "aws_secret_key" {default = "xx"}
-
 variable "myWorkloadTag" { default = "Session01-HelloWorld" }
 variable "aws_region" {default = "ap-southeast-2"}
+variable "route53_zone" {default = "Z2QPKALICT46EJ"}
+variable "dnszone" {default = "automates.mobiletoaster.com"}
 
 provider "aws" {
-	access_key = "${var.aws_access_key}"
-	secret_key = "${var.aws_secret_key}"
+	profile = "COG-Sandbox"
 	region	= "${var.aws_region}"
 }
 
@@ -120,7 +118,7 @@ resource "aws_key_pair" "myKeyPair" {
 
 resource "aws_instance" "test_server" {
 	ami = "${data.aws_ami.winSvr2019.id}"
-	instance_type = "t2.small"
+	instance_type = "t2.large"
 	key_name = "${aws_key_pair.myKeyPair.id}"
 	subnet_id = "${aws_subnet.myVpc-sn01.id}"
 	vpc_security_group_ids = ["${aws_security_group.myVpcSg-Allow-HTTPS_RDP.id}"]
@@ -132,6 +130,14 @@ resource "aws_instance" "test_server" {
 		Worklodad = "${var.myWorkloadTag}"
 	}
 	
+}
+
+resource "aws_route53_record" "myDNSRecord" {
+	zone_id = "${var.route53_zone}"
+	name = "${var.friendlyName}.${var.dnszone}"
+	type = "A"
+	ttl = "60"
+	records = ["${aws_instance.test_server.public_ip}"]
 }
 
 output "Connect_IP_Address" {
