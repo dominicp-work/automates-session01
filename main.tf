@@ -9,7 +9,7 @@ variable "dnszone" {default = "automates.mobiletoaster.com"}
 
 provider "aws" {
 	profile = "COG-Sandbox"
-	shared_credentials_file = "C:\Users\LocalAdmin\.aws\credentials"
+	shared_credentials_file = "C:/Users/LocalAdmin/.aws/credentials"
 	region	= "${var.aws_region}"
 }
 
